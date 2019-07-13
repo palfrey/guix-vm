@@ -1,0 +1,19 @@
+{
+    "builders": [{
+        "type": "virtualbox-iso",
+        "guest_os_type": "Linux_64",
+        "iso_url": "./guix-system-install-1.0.1.x86_64-linux.iso",
+        "iso_checksum": "4ef91c584c6749d6796ab17537bbead7fb41741e47fedab9457607a292a98de1",
+        "iso_checksum_type": "sha256",
+        "ssh_username": "vagrant",
+        "ssh_password": "vagrant",
+        "boot_command": [
+            "<enter><wait15s><enter><end><up><up><enter><down><enter><enter>",
+            "useradd vagrant --create-home -p \\$1\\$Mbpb1qxp\\$crlOn8ukvC3QGjfCXn2sI1<enter>",
+            "guix package -i openssh<enter>",
+            "herd start ssh-daemon<enter>"
+        ],
+        "ssh_timeout": "30m",
+        "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+    }]
+}
