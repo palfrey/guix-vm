@@ -1,2 +1,2 @@
 https://ftp.gnu.org/gnu/guix/guix-system-install-1.0.1.x86_64-linux.iso.xz
-echo vagrant | openssl passwd -1 -stdin
+packer build -force -on-error=abort guix-vm.json
