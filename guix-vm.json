@@ -4,6 +4,7 @@
         "vm_name": "guixsd",
         "guest_os_type": "Linux_64",
         "memory": 1024,
+        "headless": true,
         "iso_url": "./guix-system-install-1.0.1.x86_64-linux.iso",
         "iso_checksum": "4ef91c584c6749d6796ab17537bbead7fb41741e47fedab9457607a292a98de1",
         "iso_checksum_type": "sha256",
@@ -39,11 +40,27 @@
             "inline": [
                 "guix system init /mnt/etc/config.scm /mnt"
             ]
+        },
+        {
+            "type": "shell",
+            "inline": ["reboot"],
+            "expect_disconnect": true
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "guix pull",
+                "guix system reconfigure /etc/config.scm",
+                "guix system delete-generations",
+                "guix gc"
+            ]
         }
     ],
     "post-processors": [
         {
-            "type": "vagrant"
+            "type": "vagrant",
+            "keep_input_artifact": true,
+            "output": "guixsd_{{.Provider}}.box"
         }
     ]
 }

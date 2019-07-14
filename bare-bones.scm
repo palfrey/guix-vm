@@ -18,17 +18,18 @@
                         (type "ext4"))
                       %base-file-systems))
 
-  (users (cons (user-account
+  (users (append (list (user-account
                 (name "vagrant")
                 (password (crypt "vagrant" "$6$abc"))
                 (group "users")
                 (supplementary-groups '("wheel")))
+               (user-account (inherit %root-account)
+                (password (crypt "password" "$6$abc"))))
                %base-user-accounts))
 
-  ;; Add services to the baseline: a DHCP client and
-  ;; an SSH server.
   (services (append (list (service dhcp-client-service-type)
                           (service openssh-service-type
                                    (openssh-configuration
+                                    (permit-root-login #t)
                                     (port-number 22))))
                     %base-services)))
