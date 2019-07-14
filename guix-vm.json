@@ -1,6 +1,7 @@
 {
     "builders": [{
         "type": "virtualbox-iso",
+        "vm_name": "guixsd",
         "guest_os_type": "Linux_64",
         "memory": 1024,
         "iso_url": "./guix-system-install-1.0.1.x86_64-linux.iso",
@@ -11,7 +12,7 @@
         "boot_command": [
             "<enter><wait15s><enter><end><up><up><enter><down><enter><enter>",
             "passwd root<enter>password<enter>password<enter>",
-            "guix package --debug=2 -i openssh<enter>",
+            "guix package -i openssh<enter>",
             "herd start ssh-daemon<enter>"
         ],
         "ssh_timeout": "10m",
@@ -21,8 +22,8 @@
         {
             "type": "shell",
             "inline": [
-                "parted -s --align=none /dev/sda mktable gpt mkpart primary ext2 0 100%",
-                "mkfs.ext4 -L my-root /dev/sda1",
+                "parted -s --align=none /dev/sda mktable gpt mkpart primary ext2 0 2MB mkpart primary ext2 2MB 100% set 1 bios_grub on",
+                "mkfs.ext4 -L my-root /dev/sda2",
                 "mount LABEL=my-root /mnt",
                 "herd start cow-store /mnt",
                 "mkdir /mnt/etc"
@@ -36,8 +37,13 @@
         {
             "type": "shell",
             "inline": [
-                "guix system init /mnt/etc/config.scm /mnt --no-bootloader"
+                "guix system init /mnt/etc/config.scm /mnt"
             ]
+        }
+    ],
+    "post-processors": [
+        {
+            "type": "vagrant"
         }
     ]
 }
