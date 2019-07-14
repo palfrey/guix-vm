@@ -2,3 +2,6 @@
 packer_cache
 output-virtualbox-iso/
 .vagrant/
+*.box
+Vagrantfile
+vagrant.pub

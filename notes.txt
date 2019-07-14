@@ -8,3 +8,5 @@ https://www.gnu.org/software/guix/blog/2019/creating-and-using-a-custom-linux-ke
 https://www.gnu.org/software/guix/blog/2019/towards-guix-for-devops/
 
 https://github.com/cbaines/practical-introduction-to-guix - shows how to convert the Qemu image
+
+https://stackoverflow.com/a/32106919/320546 # Vagrant keys

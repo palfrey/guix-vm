@@ -21,6 +21,10 @@
     }],
     "provisioners": [
         {
+            "type": "shell-local",
+            "inline": ["wget -O vagrant.pub https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub"]
+        },
+        {
             "type": "shell",
             "inline": [
                 "parted -s --align=none /dev/sda mktable gpt mkpart primary ext2 0 2MB mkpart primary ext2 2MB 100% set 1 bios_grub on",
@@ -47,8 +51,20 @@
             "expect_disconnect": true
         },
         {
+            "type": "file",
+            "source": "vagrant.pub",
+            "destination": "/tmp/vagrant.pub",
+            "generated": true,
+            "pause_before": "10s"
+        },
+        {
             "type": "shell",
             "inline": [
+                "mkdir /home/vagrant/.ssh/",
+                "mv /tmp/vagrant.pub /home/vagrant/.ssh/authorized_keys",
+                "chmod 700 /home/vagrant/.ssh",
+                "chmod 600 /home/vagrant/.ssh/authorized_keys",
+                "chown -R vagrant:users /home/vagrant/.ssh",
                 "guix pull",
                 "guix system reconfigure /etc/config.scm",
                 "guix system delete-generations",
