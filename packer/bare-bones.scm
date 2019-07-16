@@ -28,6 +28,10 @@
                 (password (crypt "password" "$6$abc"))))
                %base-user-accounts))
 
+  (sudoers-file (plain-file "sudoers" "\
+root ALL=(ALL) ALL
+vagrant ALL=(ALL) NOPASSWD: ALL\n"))
+
   (packages (filter (lambda (p)
     (not (member (package-name p) '("wireless-tools" "iw" "zile")))) ; Not needed in Vagrant environment
     %base-packages))
