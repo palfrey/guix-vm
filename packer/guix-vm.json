@@ -1,4 +1,5 @@
 {
+    "min_packer_version": "1.4.0",
     "builders": [{
         "type": "virtualbox-iso",
         "vm_name": "guixsd",
