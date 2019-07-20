@@ -23,3 +23,7 @@ and the box and plugins will be automagically installed for you.
 Notes
 -----
 * The Virtualbox Guest additions don't work, because they assume the existence of `ldconfig` (see https://github.com/palfrey/guix-vm/issues/1) which means that things like the default virtual folders don't work. Rsync works fine though, hence the item for synced_folder above.
+
+Development
+-----------
+For details of the individual items, see the README's in the individual folders.
