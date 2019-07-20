@@ -58,6 +58,11 @@
             "pause_before": "10s"
         },
         {
+            "type": "file",
+            "source": "channels.scm",
+            "destination": "/tmp/channels.scm"
+        },
+        {
             "type": "shell",
             "inline": [
                 "mkdir /home/vagrant/.ssh/",
@@ -65,6 +70,8 @@
                 "chmod 700 /home/vagrant/.ssh",
                 "chmod 600 /home/vagrant/.ssh/authorized_keys",
                 "chown -R vagrant:users /home/vagrant/.ssh",
+                "mkdir -p ~/.config/guix",
+                "mv /tmp/channels.scm ~/.config/guix",
                 "guix pull",
                 "guix system reconfigure /etc/config.scm",
                 "guix system delete-generations",
