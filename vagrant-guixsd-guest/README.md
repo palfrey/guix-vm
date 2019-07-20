@@ -5,3 +5,7 @@ vagrant-guixsd-guest
 [GuixSD](https://guix.gnu.org/) guest support plugin for Vagrant.
 
 Vagrant doesn't natively support GuixSD, and so it needs to be told about it in order to fully support various Vagrant functionality (e.g. clean shutdown). Most of it is from the core Linux support, but there's a small amount of customisation for GuixSD-specific stuff.
+
+TODO
+----
+* Make Virtualbox Guest additions work (https://github.com/palfrey/guix-vm/issues/1)

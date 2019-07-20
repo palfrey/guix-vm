@@ -22,6 +22,11 @@ module VagrantPlugins
         require_relative "cap/halt"
         Cap::Halt
       end
+
+      guest_capability(:guixsd, :rsync_install) do
+        require_relative "cap/rsync"
+        Cap::RSync
+      end
     end
   end
 end
