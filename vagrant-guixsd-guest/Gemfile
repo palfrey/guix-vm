@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 group :development do
   # Because of https://github.com/hashicorp/vagrant/pull/10945
-  gem "vagrant", git: "https://github.com/hashicorp/vagrant.git", :tag => 'v2.2.4'
+  gem "vagrant", git: "https://github.com/hashicorp/vagrant.git", :ref => '88b656da5f6b54c7efa4da14ef42efefbbe70113'
 end
 
 group :plugins do
