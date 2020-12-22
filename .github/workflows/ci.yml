@@ -18,6 +18,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Cache packer files
+        uses: actions/cache@v2
+        with:
+          path: packer/packer_cache
+          key: ${{ runner.os }}-${{ hashFiles('packer/guix-vm.json') }}        
+
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
