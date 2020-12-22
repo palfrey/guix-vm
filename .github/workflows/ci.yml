@@ -7,7 +7,7 @@ on:
 
 jobs:
   packer:
-    runs-on: ubuntu-20.04
+    runs-on: macos-10.15
     name: packer
 
     defaults:
@@ -18,28 +18,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # fix backwards incompatibilities in template
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      
+      - name: Install packer
+        run: brew install packer
+
       - name: Fix Template
-        uses: palfrey/packer-github-actions@working-directory
-        with:
-          command: fix
-          working_directory: packer
-          target: guix-vm.json
+        run: packer fix guix-vm.json
 
-      # validate templates
       - name: Validate Template
-        uses: palfrey/packer-github-actions@working-directory
-        with:
-          command: validate          
-          arguments: -syntax-only
-          working_directory: packer
-          target: guix-vm.json
+        run: packer validate -syntax-only guix-vm.json
 
-      # build artifact
       - name: Build Artifact
-        uses: palfrey/packer-github-actions@working-directory
-        with:
-          command: build
-          arguments: "-color=false -on-error=abort"
-          working_directory: packer
-          target: guix-vm.json
+        run: packer build guix-vm.json
