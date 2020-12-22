@@ -19,6 +19,7 @@ jobs:
         uses: operatehappy/packer-github-actions@master
         with:
           command: fix
+          target: packer/guix-vm.json
 
       # validate templates
       - name: Validate Template
