@@ -1,29 +1,33 @@
 {
     "min_packer_version": "1.4.0",
-    "builders": [{
-        "type": "virtualbox-iso",
-        "vm_name": "guixsd",
-        "guest_os_type": "Linux_64",
-        "memory": 1024,
-        "headless": true,
-        "iso_url": "https://ftp.gnu.org/gnu/guix/guix-system-install-1.1.0.x86_64-linux.iso.xz",
-        "iso_checksum": "ff2d74f64d8e1545271ab0f46ee0e11ae96fbb09cb105c3d929c9e123ad00ce2",
-        "iso_checksum_type": "sha256",
-        "ssh_username": "root",
-        "ssh_password": "password",
-        "boot_command": [
-            "<enter><wait15s><enter><end><up><up><enter><down><enter><enter>",
-            "passwd root<enter>password<enter>password<enter>",
-            "guix package -i openssh<enter>",
-            "herd start ssh-daemon<enter>"
-        ],
-        "ssh_timeout": "10m",
-        "shutdown_command": "shutdown"
-    }],
+    "builders": [
+        {
+            "type": "virtualbox-iso",
+            "vm_name": "guixsd",
+            "guest_os_type": "Linux_64",
+            "memory": 1024,
+            "headless": true,
+            "iso_url": "https://ftp.gnu.org/gnu/guix/guix-system-install-1.1.0.x86_64-linux.iso.xz",
+            "iso_checksum": "ff2d74f64d8e1545271ab0f46ee0e11ae96fbb09cb105c3d929c9e123ad00ce2",
+            "iso_checksum_type": "sha256",
+            "ssh_username": "root",
+            "ssh_password": "password",
+            "boot_command": [
+                "<enter><wait15s><enter><end><up><up><enter><down><enter><enter>",
+                "passwd root<enter>password<enter>password<enter>",
+                "guix package -i openssh<enter>",
+                "herd start ssh-daemon<enter>"
+            ],
+            "ssh_timeout": "10m",
+            "shutdown_command": "shutdown"
+        }
+    ],
     "provisioners": [
         {
             "type": "shell-local",
-            "inline": ["wget -O vagrant.pub https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub"]
+            "inline": [
+                "wget -O vagrant.pub https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub"
+            ]
         },
         {
             "type": "shell",
@@ -48,7 +52,9 @@
         },
         {
             "type": "shell",
-            "inline": ["reboot"],
+            "inline": [
+                "reboot"
+            ],
             "expect_disconnect": true
         },
         {
