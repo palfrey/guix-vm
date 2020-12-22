@@ -38,4 +38,6 @@ jobs:
         run: packer validate -syntax-only guix-vm.json
 
       - name: Build Artifact
+        env:
+          PACKER_LOG: 1
         run: packer build guix-vm.json
