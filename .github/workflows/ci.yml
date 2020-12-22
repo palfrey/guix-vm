@@ -20,23 +20,26 @@ jobs:
 
       # fix backwards incompatibilities in template
       - name: Fix Template
-        uses: operatehappy/packer-github-actions@master
+        uses: palfrey/packer-github-actions@working-directory
         with:
           command: fix
+          working_directory: packer
           target: guix-vm.json
 
       # validate templates
       - name: Validate Template
-        uses: operatehappy/packer-github-actions@master
+        uses: palfrey/packer-github-actions@working-directory
         with:
-          command: validate
+          command: validate          
           arguments: -syntax-only
+          working_directory: packer
           target: guix-vm.json
 
       # build artifact
       - name: Build Artifact
-        uses: operatehappy/packer-github-actions@master
+        uses: palfrey/packer-github-actions@working-directory
         with:
           command: build
           arguments: "-color=false -on-error=abort"
+          working_directory: packer
           target: guix-vm.json
