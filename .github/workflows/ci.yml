@@ -18,12 +18,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+      # - name: Set up Homebrew
+      #   id: set-up-homebrew
+      #   uses: Homebrew/actions/setup-homebrew@master
       
-      - name: Install packer
-        run: brew install packer
+      # Apparently already installed!
+      # - name: Install packer
+      #   run: brew install packer
 
       - name: Fix Template
         run: packer fix guix-vm.json
