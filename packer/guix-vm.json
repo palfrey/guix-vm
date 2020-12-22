@@ -7,6 +7,8 @@
                 "guix package -i openssh<enter>",
                 "herd start ssh-daemon<enter>"
             ],
+            "boot_wait": "1m",
+            "boot_keygroup_interval": "5s",
             "guest_os_type": "Linux_64",
             "headless": true,
             "iso_checksum": "sha256:ff2d74f64d8e1545271ab0f46ee0e11ae96fbb09cb105c3d929c9e123ad00ce2",
