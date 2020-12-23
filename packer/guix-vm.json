@@ -19,7 +19,11 @@
             "ssh_timeout": "10m",
             "ssh_username": "root",
             "type": "virtualbox-iso",
-            "vm_name": "guixsd"
+            "vm_name": "guixsd",
+            "vboxmanage": [
+                ["modifyvm", "{{.Name}}", "--recordingfile", "capture.webm"],
+                ["modifyvm", "{{.Name}}", "--recording",     "on"]
+            ]
         }
     ],
     "min_packer_version": "1.4.0",
