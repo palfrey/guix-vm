@@ -21,7 +21,7 @@
             "type": "virtualbox-iso",
             "vm_name": "guixsd",
             "vboxmanage": [
-                ["modifyvm", "{{.Name}}", "--recordingfile", "capture.webm"],
+                ["modifyvm", "{{.Name}}", "--recordingfile", "/tmp/capture.webm"],
                 ["modifyvm", "{{.Name}}", "--recording",     "on"]
             ]
         }
