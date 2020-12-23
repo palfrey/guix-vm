@@ -22,7 +22,8 @@
             "vm_name": "guixsd",
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--recordingfile", "/tmp/capture.webm"],
-                ["modifyvm", "{{.Name}}", "--recording",     "on"]
+                ["modifyvm", "{{.Name}}", "--recordingscreens", "0"],
+                ["modifyvm", "{{.Name}}", "--recording",     "on"]                
             ]
         }
     ],
