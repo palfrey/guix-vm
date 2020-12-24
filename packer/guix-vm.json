@@ -11,7 +11,7 @@
                 "guix package -i openssh<enter>",
                 "herd start ssh-daemon<enter>"
             ],
-            "boot_wait": "1m",
+            "boot_wait": "2m",
             "boot_keygroup_interval": "2s",
             "guest_os_type": "Linux26_64",
             "guest_additions_mode": "disable",
