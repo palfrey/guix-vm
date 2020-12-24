@@ -2,13 +2,17 @@
     "builders": [
         {
             "boot_command": [
-                "<enter><wait15s><enter><end><up><up><enter><down><enter><enter>",
+                "<enter><wait1s>",
+                "<end><wait1s><up><wait1s><up><wait1s><up><wait1s><enter><wait1s>",
+                "<down><wait1s>",
+                "<enter><wait1s>",
+                "<enter><wait1s>",
                 "passwd root<enter>password<enter>password<enter>",
                 "guix package -i openssh<enter>",
                 "herd start ssh-daemon<enter>"
             ],
             "boot_wait": "1m",
-            "boot_keygroup_interval": "5s",
+            "boot_keygroup_interval": "2s",
             "guest_os_type": "Linux26_64",
             "guest_additions_mode": "disable",
             "headless": true,
