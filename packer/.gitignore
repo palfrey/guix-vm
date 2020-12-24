@@ -5,4 +5,4 @@ output-virtualbox-iso/
 *.box
 Vagrantfile
 vagrant.pub
-capture.webm
+capture*.webm
