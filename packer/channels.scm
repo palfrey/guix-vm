@@ -1,4 +1,5 @@
 (list (channel
     (name 'guix)
-    (url "git://git.savannah.gnu.org/guix.git")
-    (branch "version-1.1.0")))
+    (url %default-channel-url)
+    (branch "version-1.2.0")
+    (introduction %guix-channel-introduction)))
