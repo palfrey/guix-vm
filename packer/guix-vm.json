@@ -78,7 +78,7 @@
         {
             "destination": "/tmp/vagrant.pub",
             "generated": true,
-            "pause_before": "10s",
+            "pause_before": "2m",
             "source": "vagrant.pub",
             "type": "file"
         },
