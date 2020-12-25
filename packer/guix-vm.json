@@ -69,11 +69,23 @@
             "type": "shell"
         },
         {
+            "type": "shell-local",
+            "inline": [
+                "VBoxManage guestproperty enumerate guixsd"
+            ]
+        },
+        {
             "expect_disconnect": true,
             "inline": [
                 "reboot"
             ],
             "type": "shell"
+        },
+        {
+            "type": "shell-local",
+            "inline": [
+                "VBoxManage guestproperty enumerate guixsd"
+            ]
         },
         {
             "destination": "/tmp/vagrant.pub",
