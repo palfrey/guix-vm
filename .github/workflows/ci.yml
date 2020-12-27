@@ -1,0 +1,49 @@
+---
+name: Packer
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  packer:
+    runs-on: macos-10.15
+    name: packer
+
+    defaults:
+      run:
+        working-directory: packer
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Cache packer files
+        uses: actions/cache@v2
+        with:
+          path: packer/packer_cache
+          key: ${{ runner.os }}-${{ hashFiles('packer/guix-vm.json') }}        
+
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      
+      - name: Install packer
+        run: brew upgrade packer
+
+      - name: Fix Template
+        run: packer fix guix-vm.json
+
+      - name: Validate Template
+        run: packer validate -syntax-only guix-vm.json
+
+      - name: Build Artifact
+        env:
+          PACKER_LOG: 1
+        run: packer build guix-vm.json
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: run-capture
+          path: packer/capture*.webm
