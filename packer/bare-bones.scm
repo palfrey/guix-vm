@@ -40,5 +40,8 @@ vagrant ALL=(ALL) NOPASSWD: ALL\n"))
                           (service openssh-service-type
                                    (openssh-configuration
                                     (permit-root-login #t)
+                                    (extra-content "\
+                                    ClientAliveInterval 300
+                                    ClientAliveCountMax 10")
                                     (port-number 22))))
                     %base-services)))
