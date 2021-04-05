@@ -41,7 +41,7 @@ jobs:
 
       - name: Check system
         run: |
-          free -m
+          vm_stat
           sudo /usr/sbin/system_profiler SPHardwareDataType
 
       - name: Build Artifact
