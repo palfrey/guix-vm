@@ -41,7 +41,7 @@ vagrant ALL=(ALL) NOPASSWD: ALL\n"))
                                    (openssh-configuration
                                     (permit-root-login #t)
                                     (extra-content "\
-                                    ClientAliveInterval 300
-                                    ClientAliveCountMax 10")
+                                    ClientAliveInterval 30
+                                    ClientAliveCountMax 0")
                                     (port-number 22))))
                     %base-services)))
