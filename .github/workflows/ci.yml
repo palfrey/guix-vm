@@ -39,6 +39,11 @@ jobs:
       - name: Validate Template
         run: packer validate -syntax-only guix-vm.json
 
+      - name: Check system
+        run: |
+          free -m
+          sudo /usr/sbin/system_profiler SPHardwareDataType
+
       - name: Build Artifact
         env:
           PACKER_LOG: 1
