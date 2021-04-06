@@ -66,6 +66,7 @@
             "inline": [
                 "guix system init /mnt/etc/config.scm /mnt"
             ],
+            "max_retries": 3,
             "type": "shell"
         },
         {
