@@ -1,5 +1,6 @@
 guix-vm
 =======
+[![Packer](https://github.com/palfrey/guix-vm/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/palfrey/guix-vm/actions/workflows/ci.yml)
 
 This repository contains everything you need to get a [GuixSD](https://guix.gnu.org/) [Vagrant](https://www.vagrantup.com/) environment setup.
 
