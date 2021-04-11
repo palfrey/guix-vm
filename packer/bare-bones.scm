@@ -4,6 +4,7 @@
 (use-modules (gnu))
 (use-modules (guix packages))
 (use-service-modules networking ssh)
+(use-package-modules certs)
 
 (operating-system
   (host-name "guixsd")
@@ -32,9 +33,9 @@
 root ALL=(ALL) ALL
 vagrant ALL=(ALL) NOPASSWD: ALL\n"))
 
-  (packages (filter (lambda (p)
+  (packages (append (list nss-certs) (filter (lambda (p)
     (not (member (package-name p) '("wireless-tools" "iw" "zile")))) ; Not needed in Vagrant environment
-    %base-packages))
+    %base-packages)))
 
   (services (append (list (service dhcp-client-service-type)
                           (service openssh-service-type
