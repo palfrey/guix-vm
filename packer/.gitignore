@@ -6,3 +6,5 @@ output-virtualbox-iso/
 Vagrantfile
 vagrant.pub
 capture*.webm
+packer
+packer*.zip
