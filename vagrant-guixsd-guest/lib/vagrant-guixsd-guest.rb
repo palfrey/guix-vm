@@ -1,11 +1,11 @@
 begin
   require "vagrant"
 rescue LoadError
-  raise "The GuixSD plugin must be run within Vagrant."
+  raise "The GuixSD plugin must be run within Vagrant"
 end
 
 if Vagrant::VERSION < "1.2.0"
-  raise "The Vagrant AWS plugin is only compatible with Vagrant 1.2+"
+  raise "The Vagrant GuixSD Guest plugin is only compatible with Vagrant 1.2+"
 end
 
 module VagrantPlugins
