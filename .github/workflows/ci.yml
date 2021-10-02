@@ -9,7 +9,7 @@ on:
 
 jobs:
   packer:
-    runs-on: macos-10.15
+    runs-on: macos-11
     name: packer
 
     defaults:
@@ -33,20 +33,25 @@ jobs:
       - name: Install packer
         run: brew upgrade packer
 
+      - name: Install Vagrant
+        run: brew install --cask vagrant
+
+      - name: Install Virtualbox
+        run: brew install --cask virtualbox
+
       - name: Fix Template
         run: packer fix guix-vm.json
 
       - name: Validate Template
         run: packer validate -syntax-only guix-vm.json
 
-      # FIXME: This seems to work locally, but often fails in github actions
-      # - name: Build Artifact
-      #   env:
-      #     PACKER_LOG: 1
-      #   run: packer build guix-vm.json
+      - name: Build Artifact
+        env:
+          PACKER_LOG: 1
+        run: packer build guix-vm.json
 
-      # - uses: actions/upload-artifact@v2
-      #   if: ${{ always() }}
-      #   with:
-      #     name: run-capture
-      #     path: packer/capture*.webm
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: run-capture
+          path: packer/capture*.webm
