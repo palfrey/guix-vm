@@ -3,6 +3,8 @@ name: Packer
 
 on:
   push:
+    branches:
+      - main
   pull_request:
   schedule:
     - cron: '0 0 1 * *'  
@@ -39,14 +41,13 @@ jobs:
       - name: Validate Template
         run: packer validate -syntax-only guix-vm.json
 
-      # FIXME: This seems to work locally, but often fails in github actions
-      # - name: Build Artifact
-      #   env:
-      #     PACKER_LOG: 1
-      #   run: packer build guix-vm.json
+      - name: Build Artifact
+        env:
+          PACKER_LOG: 1
+        run: packer build guix-vm.json
 
-      # - uses: actions/upload-artifact@v2
-      #   if: ${{ always() }}
-      #   with:
-      #     name: run-capture
-      #     path: packer/capture*.webm
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: run-capture
+          path: packer/capture*.webm
