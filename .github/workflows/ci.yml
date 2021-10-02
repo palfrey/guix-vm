@@ -35,12 +35,6 @@ jobs:
       - name: Install packer
         run: brew upgrade packer
 
-      - name: Install Vagrant
-        run: brew install --cask vagrant
-
-      - name: Install Virtualbox
-        run: brew install --cask virtualbox
-
       - name: Fix Template
         run: packer fix guix-vm.json
 
