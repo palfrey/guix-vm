@@ -17,7 +17,7 @@
       "guest_os_type": "Linux26_64",
       "headless": true,
       "iso_checksum": "sha256:087a97dba2319477185471a28812949cc165e60e58863403e4a606c1baa05f81",
-      "iso_url": "https://ftp.gnu.org/gnu/guix/guix-system-install-1.4.0.x86_64-linux.iso",
+      "iso_url": "https://ftpmirror.gnu.org/gnu/guix/guix-system-install-1.4.0.x86_64-linux.iso",
       "memory": 4096,
       "shutdown_command": "shutdown",
       "ssh_password": "password",
