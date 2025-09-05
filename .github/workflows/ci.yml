@@ -29,13 +29,9 @@ jobs:
           path: packer/packer_cache
           key: ${{ runner.os }}-${{ hashFiles('packer/guix-vm.json') }}        
 
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-      
-      - name: Install packer
-        run: brew upgrade packer
-
+      - name: Install asdf & tools
+        uses: asdf-vm/actions/install@v4
+        
       - name: Fix Template
         run: packer fix guix-vm.json
 
