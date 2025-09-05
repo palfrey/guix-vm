@@ -12,7 +12,7 @@
         "herd start ssh-daemon<enter>"
       ],
       "boot_keygroup_interval": "2s",
-      "boot_wait": "5m",
+      "boot_wait": "2m",
       "guest_additions_mode": "disable",
       "guest_os_type": "Linux26_64",
       "headless": true,
