@@ -1,120 +1,136 @@
 {
-    "builders": [
-        {
-            "boot_command": [
-                "<enter><wait1s>",
-                "<end><wait1s><up><wait1s><up><wait1s><up><wait1s><enter><wait1s>",
-                "<down><wait1s>",
-                "<enter><wait1s>",
-                "<enter><wait1s>",
-                "passwd root<enter>password<enter>password<enter>",
-                "guix package -i openssh<enter>",
-                "herd start ssh-daemon<enter>"
-            ],
-            "boot_wait": "5m",
-            "boot_keygroup_interval": "2s",
-            "guest_os_type": "Linux26_64",
-            "guest_additions_mode": "disable",
-            "headless": true,
-            "iso_checksum": "sha256:087a97dba2319477185471a28812949cc165e60e58863403e4a606c1baa05f81",
-            "iso_url": "https://ftp.gnu.org/gnu/guix/guix-system-install-1.4.0.x86_64-linux.iso",
-            "memory": 4096,
-            "shutdown_command": "shutdown",
-            "ssh_password": "password",
-            "ssh_timeout": "10m",
-            "ssh_username": "root",
-            "type": "virtualbox-iso",
-            "vm_name": "guixsd",
-            "vboxmanage": [
-                ["modifyvm", "{{.Name}}", "--recordingfile", "capture.webm"],
-                ["modifyvm", "{{.Name}}", "--recordingscreens", "0"],
-                ["modifyvm", "{{.Name}}", "--recording",     "on"]                
-            ]
-        }
-    ],
-    "min_packer_version": "1.4.0",
-    "post-processors": [
-        {
-            "keep_input_artifact": true,
-            "output": "guixsd_{{.Provider}}.box",
-            "type": "vagrant"
-        }
-    ],
-    "provisioners": [
-        {
-            "inline": [
-                "wget -O vagrant.pub https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub"
-            ],
-            "type": "shell-local"
-        },
-        {
-            "inline": [
-                "parted -s --align=none /dev/sda mktable gpt mkpart primary ext2 0 2MB mkpart primary ext2 2MB 100% set 1 bios_grub on",
-                "mkfs.ext4 -L my-root /dev/sda2",
-                "mount LABEL=my-root /mnt",
-                "herd start cow-store /mnt",
-                "mkdir /mnt/etc"
-            ],
-            "type": "shell"
-        },
-        {
-            "destination": "/mnt/etc/config.scm",
-            "source": "bare-bones.scm",
-            "type": "file"
-        },
-        {
-            "inline": [
-                "guix system init /mnt/etc/config.scm /mnt"
-            ],
-            "max_retries": 3,
-            "type": "shell"
-        },
-        {
-            "type": "shell-local",
-            "inline": [
-                "VBoxManage guestproperty enumerate guixsd"
-            ]
-        },
-        {
-            "expect_disconnect": true,
-            "inline": [
-                "reboot"
-            ],
-            "type": "shell"
-        },
-        {
-            "type": "shell-local",
-            "inline": [
-                "VBoxManage guestproperty enumerate guixsd"
-            ]
-        },
-        {
-            "destination": "/tmp/vagrant.pub",
-            "generated": true,
-            "pause_before": "2m",
-            "source": "vagrant.pub",
-            "type": "file"
-        },
-        {
-            "destination": "/tmp/channels.scm",
-            "source": "channels.scm",
-            "type": "file"
-        },
-        {
-            "inline": [
-                "mkdir /home/vagrant/.ssh/",
-                "mv /tmp/vagrant.pub /home/vagrant/.ssh/authorized_keys",
-                "chmod 700 /home/vagrant/.ssh",
-                "chmod 600 /home/vagrant/.ssh/authorized_keys",
-                "chown -R vagrant:users /home/vagrant/.ssh",
-                "mkdir -p ~/.config/guix",
-                "mv /tmp/channels.scm ~/.config/guix",
-                "guix pull",
-                "guix system reconfigure /etc/config.scm",
-                "guix system delete-generations",
-                "guix gc"
-            ],
-            "type": "shell"
-        }
-    ]
+  "builders": [
+    {
+      "boot_command": [
+        "<enter><wait1s>",
+        "<end><wait1s><up><wait1s><up><wait1s><up><wait1s><enter><wait1s>",
+        "<down><wait1s>",
+        "<enter><wait1s>",
+        "<enter><wait1s>",
+        "passwd root<enter>password<enter>password<enter>",
+        "guix package -i openssh<enter>",
+        "herd start ssh-daemon<enter>"
+      ],
+      "boot_keygroup_interval": "2s",
+      "boot_wait": "5m",
+      "guest_additions_mode": "disable",
+      "guest_os_type": "Linux26_64",
+      "headless": true,
+      "iso_checksum": "sha256:087a97dba2319477185471a28812949cc165e60e58863403e4a606c1baa05f81",
+      "iso_url": "https://ftp.gnu.org/gnu/guix/guix-system-install-1.4.0.x86_64-linux.iso",
+      "memory": 4096,
+      "shutdown_command": "shutdown",
+      "ssh_password": "password",
+      "ssh_timeout": "10m",
+      "ssh_username": "root",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--recordingfile",
+          "capture.webm"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--recordingscreens",
+          "0"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--recording",
+          "on"
+        ]
+      ],
+      "vm_name": "guixsd"
+    }
+  ],
+  "min_packer_version": "1.4.0",
+  "post-processors": [
+    {
+      "keep_input_artifact": true,
+      "output": "guixsd_{{.Provider}}.box",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "wget -O vagrant.pub https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub"
+      ],
+      "type": "shell-local"
+    },
+    {
+      "inline": [
+        "parted -s --align=none /dev/sda mktable gpt mkpart primary ext2 0 2MB mkpart primary ext2 2MB 100% set 1 bios_grub on",
+        "mkfs.ext4 -L my-root /dev/sda2",
+        "mount LABEL=my-root /mnt",
+        "herd start cow-store /mnt",
+        "mkdir /mnt/etc"
+      ],
+      "type": "shell"
+    },
+    {
+      "destination": "/mnt/etc/config.scm",
+      "source": "bare-bones.scm",
+      "type": "file"
+    },
+    {
+      "inline": [
+        "guix system init /mnt/etc/config.scm /mnt"
+      ],
+      "max_retries": 3,
+      "type": "shell"
+    },
+    {
+      "inline": [
+        "VBoxManage guestproperty enumerate guixsd"
+      ],
+      "type": "shell-local"
+    },
+    {
+      "expect_disconnect": true,
+      "inline": [
+        "reboot"
+      ],
+      "type": "shell"
+    },
+    {
+      "inline": [
+        "VBoxManage guestproperty enumerate guixsd"
+      ],
+      "type": "shell-local"
+    },
+    {
+      "destination": "/tmp/vagrant.pub",
+      "generated": true,
+      "pause_before": "2m",
+      "source": "vagrant.pub",
+      "type": "file"
+    },
+    {
+      "destination": "/tmp/channels.scm",
+      "source": "channels.scm",
+      "type": "file"
+    },
+    {
+      "inline": [
+        "mkdir /home/vagrant/.ssh/",
+        "mv /tmp/vagrant.pub /home/vagrant/.ssh/authorized_keys",
+        "chmod 700 /home/vagrant/.ssh",
+        "chmod 600 /home/vagrant/.ssh/authorized_keys",
+        "chown -R vagrant:users /home/vagrant/.ssh",
+        "mkdir -p ~/.config/guix",
+        "mv /tmp/channels.scm ~/.config/guix",
+        "guix pull",
+        "guix system reconfigure /etc/config.scm",
+        "guix system delete-generations",
+        "guix gc"
+      ],
+      "type": "shell"
+    }
+  ]
 }
+
