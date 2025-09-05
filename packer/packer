@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu -o pipefail
 
-VERSION=1.8.5
+VERSION=1.11.1
 PACKER_ROOT=$(dirname $(realpath $0))
 ROOT=$(dirname ${PACKER_ROOT})
 DOWNLOADS=${PACKER_ROOT}/.downloads
