@@ -22,7 +22,7 @@
         "http://mirror.rit.edu/gnu/guix/guix-system-install-1.4.0.x86_64-linux.iso",
         "https://ftp.nluug.nl/pub/gnu/guix/guix-system-install-1.4.0.x86_64-linux.iso"
       ],
-      "memory": 4096,
+      "memory": 8192,
       "shutdown_command": "shutdown",
       "ssh_password": "password",
       "ssh_timeout": "10m",
@@ -128,10 +128,15 @@
         "chown -R vagrant:users /home/vagrant/.ssh",
         "mkdir -p ~/.config/guix",
         "mv /tmp/channels.scm ~/.config/guix",
+        "date",
         "guix pull",
+        "date",
         "guix system reconfigure /etc/config.scm",
+        "date",
         "guix system delete-generations",
-        "guix gc"
+        "date",
+        "guix gc",
+        "date"
       ],
       "type": "shell"
     }
