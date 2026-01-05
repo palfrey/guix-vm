@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.platform      = Gem::Platform::RUBY
   spec.authors       = ["Tom Parker-Shemilt"]
   spec.email         = ["palfrey@tevp.net"]
+  spec.licenses      = ['AGPL-3.0-only']
 
   spec.summary       = %q{Vagrant support for GuixSD guests}
   spec.description   = %q{Add support for GuixSD guests to Vagrant}
