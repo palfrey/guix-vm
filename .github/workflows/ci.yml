@@ -49,9 +49,7 @@ jobs:
         run: packer validate -syntax-only guix-vm.json
 
       - name: Build Artifact
-        env:
-          PACKER_LOG: 1
-        run: sudo packer build guix-vm.json
+        run: sudo PACKER_LOG=1 packer build guix-vm.json
 
       - uses: actions/upload-artifact@v4
         if: ${{ always() }}
