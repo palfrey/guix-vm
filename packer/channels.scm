@@ -1,7 +1,9 @@
 (list (channel
     (name 'guix)
-    (url "https://codeberg.org/guix/guix.git")
-    (commit "989a3916dc8967bcb7275f10452f89bc6c3389cc"); tag v1.4.0
+    ; I'd use this, but SH is down https://status.softwareheritage.org/pages/maintenance/578e5eddcdc0cc7951000520/6a0d821d817e4705f08c6fc4
+    ;(url "https://codeberg.org/guix/guix.git")
+    (url "https://github.com/Millak/guix.git")
+    (commit "8e2f32cee982d42a79e53fc1e9aa7b8ff0514714"); tag v1.4.0
     (introduction (make-channel-introduction
    "9edb3f66fd807b096b48283debdcddccfea34bad"     ;2020-05-26
    (openpgp-fingerprint

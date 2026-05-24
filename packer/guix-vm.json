@@ -13,8 +13,6 @@
       ],
       "boot_keygroup_interval": "2s",
       "boot_wait": "2m",
-      "guest_additions_mode": "disable",
-      "guest_os_type": "Linux26_64",
       "headless": true,
       "iso_checksum": "sha256:087a97dba2319477185471a28812949cc165e60e58863403e4a606c1baa05f81",
       "iso_urls": [
@@ -27,27 +25,7 @@
       "ssh_password": "password",
       "ssh_timeout": "10m",
       "ssh_username": "root",
-      "type": "virtualbox-iso",
-      "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--recordingfile",
-          "capture.webm"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--recordingscreens",
-          "0"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--recording",
-          "on"
-        ]
-      ],
+      "type": "qemu",
       "vm_name": "guixsd"
     }
   ],
@@ -68,8 +46,9 @@
     },
     {
       "inline": [
-        "parted -s --align=none /dev/sda mktable gpt mkpart primary ext2 0 2MB mkpart primary ext2 2MB 100% set 1 bios_grub on",
-        "mkfs.ext4 -L my-root /dev/sda2",
+        "ls -l /dev/block",
+        "parted -s --align=none /dev/vda mktable gpt mkpart primary ext2 0 2MB mkpart primary ext2 2MB 100% set 1 bios_grub on",
+        "mkfs.ext4 -L my-root /dev/vda2",
         "mount LABEL=my-root /mnt",
         "herd start cow-store /mnt",
         "mkdir /mnt/etc"
@@ -89,23 +68,11 @@
       "type": "shell"
     },
     {
-      "inline": [
-        "VBoxManage guestproperty enumerate guixsd"
-      ],
-      "type": "shell-local"
-    },
-    {
       "expect_disconnect": true,
       "inline": [
         "reboot"
       ],
       "type": "shell"
-    },
-    {
-      "inline": [
-        "VBoxManage guestproperty enumerate guixsd"
-      ],
-      "type": "shell-local"
     },
     {
       "destination": "/tmp/vagrant.pub",

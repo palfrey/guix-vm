@@ -12,7 +12,7 @@ on:
 
 jobs:
   packer:
-    runs-on: ubicloud-standard-4-ubuntu-2404
+    runs-on: ubuntu-24.04
     name: packer
 
     defaults:
@@ -21,11 +21,11 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - run: |
           sudo apt-get update
-          sudo apt-get install virtualbox
+          sudo apt-get install -y qemu-system-x86
 
       - name: Cache packer files
         uses: actions/cache@v4
