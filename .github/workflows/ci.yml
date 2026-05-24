@@ -23,7 +23,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
 
-      - run: |
+      - name: Install qemu
+        run: |
           sudo apt-get update
           sudo apt install -y cpu-checker
           sudo kvm-ok
@@ -50,7 +51,7 @@ jobs:
       - name: Build Artifact
         env:
           PACKER_LOG: 1
-        run: packer build guix-vm.json
+        run: sudo packer build guix-vm.json
 
       - uses: actions/upload-artifact@v4
         if: ${{ always() }}
