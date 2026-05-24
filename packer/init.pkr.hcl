@@ -4,5 +4,9 @@ packer {
         version = "~> 1"
         source  = "github.com/hashicorp/qemu"
       }
+      vagrant = {
+          version = "~> 1"
+          source = "github.com/hashicorp/vagrant"
+      }
     }
 }
