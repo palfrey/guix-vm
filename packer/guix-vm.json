@@ -26,7 +26,8 @@
       "ssh_timeout": "10m",
       "ssh_username": "root",
       "type": "qemu",
-      "vm_name": "guixsd"
+      "vm_name": "guixsd",
+      "accelerator": "kvm"
     }
   ],
   "min_packer_version": "1.4.0",
