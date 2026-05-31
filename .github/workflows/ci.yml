@@ -31,7 +31,7 @@ jobs:
           sudo apt-get install -y qemu-system-x86
 
       - name: Cache packer files
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: packer/packer_cache
           key: ${{ runner.os }}-${{ hashFiles('packer/guix-vm.json') }}        
