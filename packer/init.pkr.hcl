@@ -1,12 +1,12 @@
 packer {
     required_plugins {
-        virtualbox = {
-          version = "~> 1"
-          source  = "github.com/hashicorp/virtualbox"
-        }
-         vagrant = {
+      qemu = {
+        version = "~> 1"
+        source  = "github.com/hashicorp/qemu"
+      }
+      vagrant = {
           version = "~> 1"
           source = "github.com/hashicorp/vagrant"
-        }
+      }
     }
 }

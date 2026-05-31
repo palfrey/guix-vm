@@ -21,11 +21,14 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
-      - run: |
+      - name: Install qemu
+        run: |
           sudo apt-get update
-          sudo apt-get install virtualbox
+          sudo apt install -y cpu-checker
+          sudo kvm-ok
+          sudo apt-get install -y qemu-system-x86
 
       - name: Cache packer files
         uses: actions/cache@v4
@@ -46,9 +49,7 @@ jobs:
         run: packer validate -syntax-only guix-vm.json
 
       - name: Build Artifact
-        env:
-          PACKER_LOG: 1
-        run: packer build guix-vm.json
+        run: sudo PACKER_LOG=1 packer build guix-vm.json
 
       - uses: actions/upload-artifact@v4
         if: ${{ always() }}

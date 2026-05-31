@@ -13,7 +13,7 @@
 
   (bootloader (bootloader-configuration
                 (bootloader grub-bootloader)
-                (targets '("/dev/sda"))))
+                (targets '("/dev/vda"))))
   (file-systems (cons (file-system
                         (device (file-system-label "my-root"))
                         (mount-point "/")
