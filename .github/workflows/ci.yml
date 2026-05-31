@@ -51,7 +51,7 @@ jobs:
       - name: Build Artifact
         run: sudo PACKER_LOG=1 packer build guix-vm.json
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: ${{ always() }}
         with:
           name: run-capture
