@@ -1,7 +1,7 @@
 (list (channel
     (name 'guix)
     (url "https://codeberg.org/guix/guix.git")
-    (commit "v1.4.0")
+    (commit "989a3916dc8967bcb7275f10452f89bc6c3389cc") ; When 1.4.0 got merged into master
     (introduction (make-channel-introduction
    "9edb3f66fd807b096b48283debdcddccfea34bad"     ;2020-05-26
    (openpgp-fingerprint
