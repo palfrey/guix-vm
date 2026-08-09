@@ -41,7 +41,7 @@ GEM
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     ipaddr (1.2.9)
-    json (2.20.0)
+    json (2.21.2)
     jwt (3.2.0)
       base64
     listen (3.10.0)
